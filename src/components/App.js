@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Cell from './cell'
+// import Cell from './cell'
+import GameBoard from './gameboard'
 
 class App extends Component {
 
@@ -7,12 +8,14 @@ class App extends Component {
     super()
     this.state = {
       board: [],
-      state: ''
+      state: 'start',
+      gameOver: false
     }
   }
 
-  componentDidMount () {
-    window.fetch('http://minesweeper-api.herokuapp.com/games?difficulty=1', {method: 'POST'}).then((response) => {
+  createGame (i) {
+    console.log(i)
+    window.fetch(`http://minesweeper-api.herokuapp.com/games?difficulty=${i}`, {method: 'POST'}).then((response) => {
       return response.json()
     }).then((data) => {
       this.setState({
@@ -23,6 +26,11 @@ class App extends Component {
       })
     })
   }
+
+  // componentDidUpdate(preProps, prevState) {
+  //   if (preState === 'start')
+  //
+  // }
 
   check (x, y) {
     console.log(`Im checking ${x} and ${y}`)
@@ -47,30 +55,36 @@ class App extends Component {
     })
   }
 
-  render () {
-    const lost = this.state.state === 'lost' console.log(this.state.state)
-    const rows = this.state.board.map((row, i) => {
-      const cols = row.map((col, j) => {
-        return <Cell
-          value={col.toString()}
-          handleCheck={() => { this.check(j, i) }}
-          handleFlag={() => { this.flag(j, i) }}
-          key={j} />
-      })
-      return <tr key={i}>
-        {cols}
-      </tr>
+  reset () {
+    console.log('resetting')
+    this.setState({
+      state: 'start'
     })
+  }
+
+  render () {
+    let view
+    if (this.state.state === 'start') {
+      console.log('start')
+      view = <div>
+        <button onClick={() => this.createGame(0)}> Easy </button>
+        <button onClick={() => this.createGame(1)}> Normal </button>
+        <button onClick={() => this.createGame(2)}> Hard </button>
+      </div>
+    } else if (this.state.state === 'lost' ? this.state.gameOver === false : this.state.gameOver === true) {
+      console.log('loser')
+      view = <div>
+        <h2>{this.state.state === 'won' ? 'You Won!' : 'You Lost'}</h2>
+        <button onClick={() => this.reset()}> New Game? </button>
+      </div>
+    } else {
+      view = <GameBoard board={this.state.board} check={(x, y) => this.check(x, y)} flag={(x, y) => this.flag(x, y)} />
+    }
 
     return <div className='app'>
       <h1>Explosion Avoider!</h1>
-
-      <div className='gameboard'>
-        <table>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
+      <div className='GameBoard'>
+        {view}
       </div>
       <footer>Potatoes made with love at the Iron Yard.</footer>
     </div>
