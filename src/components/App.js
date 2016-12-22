@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import Cell from './Cell'
+import Cell from './cell'
 
 class App extends Component {
 
   constructor () {
     super()
     this.state = {
-      board: []
+      board: [],
+      state: ''
     }
   }
 
@@ -47,6 +48,7 @@ class App extends Component {
   }
 
   render () {
+    const lost = this.state.state === 'lost' console.log(this.state.state)
     const rows = this.state.board.map((row, i) => {
       const cols = row.map((col, j) => {
         return <Cell
@@ -59,6 +61,7 @@ class App extends Component {
         {cols}
       </tr>
     })
+
     return <div className='app'>
       <h1>Explosion Avoider!</h1>
 
