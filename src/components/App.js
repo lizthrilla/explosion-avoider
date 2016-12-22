@@ -22,15 +22,19 @@ class App extends Component {
         id: data.id,
         board: data.board,
         state: data.state,
-        mines: data.mines
+        mines: data.mines,
+        gameOver: false
       })
     })
   }
 
-  // componentDidUpdate(preProps, prevState) {
-  //   if (preState === 'start')
-  //
-  // }
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.state === 'playing' && this.state.state === 'lost') {
+      setTimeout((e) => { this.setState({gameOver: true}) }, 2500)
+    } else if (prevState.state === 'playing' && this.state.state === 'won') {
+      setTimeout((e) => { this.setState({gameOver: true}) }, 2500)
+    }
+  }
 
   check (x, y) {
     console.log(`Im checking ${x} and ${y}`)
@@ -71,8 +75,7 @@ class App extends Component {
         <button onClick={() => this.createGame(1)}> Normal </button>
         <button onClick={() => this.createGame(2)}> Hard </button>
       </div>
-    } else if (this.state.state === 'lost' ? this.state.gameOver === false : this.state.gameOver === true) {
-      console.log('loser')
+    } else if (this.state.gameOver) {
       view = <div>
         <h2>{this.state.state === 'won' ? 'You Won!' : 'You Lost'}</h2>
         <button onClick={() => this.reset()}> New Game? </button>
@@ -86,7 +89,8 @@ class App extends Component {
       <div className='GameBoard'>
         {view}
       </div>
-      <footer>Potatoes made with love at the Iron Yard.</footer>
+      <footer>
+        <h6>&copy; 2016 Liz Tiller.  Built at The Iron Yard - Tampa. </h6></footer>
     </div>
   }
 }
