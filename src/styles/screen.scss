@@ -1,4 +1,5 @@
 @import 'utility';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 html {
   text-size-adjust: 100%;
@@ -7,13 +8,16 @@ html {
 
 body {
   margin: 0;
-  font: $base-text-size / 1 $base-font-family;
+  font: $base-text-size / 1 Futura;
+  text-align: center;
+  color: darkmagenta;
 }
 
 body,
 #root,
 .app {
   min-height: 100vh;
+  background-color: mediumpurple;
 }
 
 .app {
@@ -21,6 +25,37 @@ body,
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.header {
+  background-image: url('../Mean_Girls_movie_logo.png');
+  height: 100px;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  h1 {
+    text-align: center;
+    padding-top: 90px;
+    font-family: Futura, san-serif;
+    color: darkmagenta;
+  }
+}
+
+h3 {
+  margin: 2em;
+  margin-top: 0;
+}
+
+button {
+  background-color: plum;
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 5px;
+  width: 100px;
+  height: auto;
+  font-family: Futura, san-serif;
 }
 
 .GameBoard {
@@ -35,24 +70,24 @@ body,
       line-height: 16px;
 
       &.unrevealed {
-        background-color: rgb(148, 148, 148);
+        background-color: plum;
       }
 
       &.empty,
       &.numbered {
-        background-color: rgb(232, 232, 232);
+        background-color: thistle;
       }
 
       &.bomb {
-        background-color: rgb(250, 89, 89);
+        background-color: fuchsia;
       }
 
       &.flagged {
-        background-color: rgb(109, 117, 167);
+        background-color: rgb(158, 0, 255);
       }
 
       &.flagbomb {
-        background-color: rgb(158, 0, 255);
+        background-color: darkmagenta;
       }
     }
   }
@@ -60,4 +95,5 @@ body,
 
 footer {
   padding: 1em;
+  color: black;
 }

@@ -71,13 +71,14 @@ class App extends Component {
     if (this.state.state === 'start') {
       console.log('start')
       view = <div>
+        <h3>On Wednesdays they wear pink. They are the plastics.  Avoid the social bombs and earn your spot at their table.</h3>
         <button onClick={() => this.createGame(0)}> Easy </button>
         <button onClick={() => this.createGame(1)}> Normal </button>
         <button onClick={() => this.createGame(2)}> Hard </button>
       </div>
     } else if (this.state.gameOver) {
       view = <div>
-        <h2>{this.state.state === 'won' ? 'You Won!' : 'You Lost'}</h2>
+        <h2>{this.state.state === 'won' ? 'That\'s\ so fetch!' : 'You can\'t\ sit with us!'}</h2>
         <button onClick={() => this.reset()}> New Game? </button>
       </div>
     } else {
@@ -85,7 +86,9 @@ class App extends Component {
     }
 
     return <div className='app'>
-      <h1>Explosion Avoider!</h1>
+      <div className='header'>
+        <h1>Plastics Avoider!</h1>
+      </div>
       <div className='GameBoard'>
         {view}
       </div>
