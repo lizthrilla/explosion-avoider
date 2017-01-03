@@ -87,7 +87,7 @@ class App extends Component {
 
     return <div className='app'>
       <div className='header'>
-        <h1>Plastics Avoider!</h1>
+        <h1>Social Bomb Avoider!</h1>
       </div>
       <div className='GameBoard'>
         {view}
